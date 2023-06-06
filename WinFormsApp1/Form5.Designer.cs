@@ -29,19 +29,21 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            tbxKundenNr = new TextBox();
+            tbxVorName = new TextBox();
             label2 = new Label();
-            textBox3 = new TextBox();
+            tbxNachName = new TextBox();
             label3 = new Label();
-            textBox4 = new TextBox();
             label4 = new Label();
             label5 = new Label();
-            dateTimePicker1 = new DateTimePicker();
+            dtpKundenAnmeldeDatum = new DateTimePicker();
             button1 = new Button();
             button2 = new Button();
-            textBox5 = new TextBox();
+            tbxKundenPunkte = new TextBox();
             label6 = new Label();
+            tbxAdresse = new TextBox();
+            label7 = new Label();
+            dtpGeburtstag = new DateTimePicker();
             SuspendLayout();
             // 
             // label1
@@ -53,19 +55,23 @@
             label1.TabIndex = 0;
             label1.Text = "Kunden Nummer";
             // 
-            // textBox1
+            // tbxKundenNr
             // 
-            textBox1.Location = new Point(297, 35);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(253, 23);
-            textBox1.TabIndex = 1;
+            tbxKundenNr.Location = new Point(297, 35);
+            tbxKundenNr.Name = "tbxKundenNr";
+            tbxKundenNr.ReadOnly = true;
+            tbxKundenNr.Size = new Size(253, 23);
+            tbxKundenNr.TabIndex = 1;
+            tbxKundenNr.TextChanged += textBox1_TextChanged;
+            tbxKundenNr.KeyUp += KundenNr_Generate;
             // 
-            // textBox2
+            // tbxVorName
             // 
-            textBox2.Location = new Point(297, 64);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(253, 23);
-            textBox2.TabIndex = 3;
+            tbxVorName.Location = new Point(297, 64);
+            tbxVorName.Name = "tbxVorName";
+            tbxVorName.Size = new Size(253, 23);
+            tbxVorName.TabIndex = 3;
+            tbxVorName.TextChanged += tbxVorname_TextChanged;
             // 
             // label2
             // 
@@ -76,12 +82,12 @@
             label2.TabIndex = 2;
             label2.Text = "Vorname";
             // 
-            // textBox3
+            // tbxNachName
             // 
-            textBox3.Location = new Point(297, 93);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(253, 23);
-            textBox3.TabIndex = 5;
+            tbxNachName.Location = new Point(297, 93);
+            tbxNachName.Name = "tbxNachName";
+            tbxNachName.Size = new Size(253, 23);
+            tbxNachName.TabIndex = 5;
             // 
             // label3
             // 
@@ -92,17 +98,10 @@
             label3.TabIndex = 4;
             label3.Text = "Nachname";
             // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(297, 122);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(253, 23);
-            textBox4.TabIndex = 7;
-            // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(166, 125);
+            label4.Location = new Point(166, 154);
             label4.Name = "label4";
             label4.Size = new Size(48, 15);
             label4.TabIndex = 6;
@@ -111,18 +110,18 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(166, 186);
+            label5.Location = new Point(166, 215);
             label5.Name = "label5";
             label5.Size = new Size(109, 15);
             label5.TabIndex = 8;
             label5.Text = "Anmeldung Datum";
             // 
-            // dateTimePicker1
+            // dtpKundenAnmeldeDatum
             // 
-            dateTimePicker1.Location = new Point(297, 180);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(253, 23);
-            dateTimePicker1.TabIndex = 9;
+            dtpKundenAnmeldeDatum.Location = new Point(297, 209);
+            dtpKundenAnmeldeDatum.Name = "dtpKundenAnmeldeDatum";
+            dtpKundenAnmeldeDatum.Size = new Size(253, 23);
+            dtpKundenAnmeldeDatum.TabIndex = 9;
             // 
             // button1
             // 
@@ -132,6 +131,7 @@
             button1.TabIndex = 10;
             button1.Text = "Kunde Hinfuegen";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
@@ -143,40 +143,66 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // textBox5
+            // tbxKundenPunkte
             // 
-            textBox5.Location = new Point(297, 151);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(253, 23);
-            textBox5.TabIndex = 13;
+            tbxKundenPunkte.Location = new Point(297, 180);
+            tbxKundenPunkte.Name = "tbxKundenPunkte";
+            tbxKundenPunkte.Size = new Size(253, 23);
+            tbxKundenPunkte.TabIndex = 13;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(166, 154);
+            label6.Location = new Point(166, 183);
             label6.Name = "label6";
             label6.Size = new Size(88, 15);
             label6.TabIndex = 12;
             label6.Text = "Kunden Punkte";
+            // 
+            // tbxAdresse
+            // 
+            tbxAdresse.Location = new Point(297, 151);
+            tbxAdresse.Name = "tbxAdresse";
+            tbxAdresse.Size = new Size(253, 23);
+            tbxAdresse.TabIndex = 15;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(166, 125);
+            label7.Name = "label7";
+            label7.Size = new Size(65, 15);
+            label7.TabIndex = 14;
+            label7.Text = "Geburtstag";
+            label7.Click += label7_Click;
+            // 
+            // dtpGeburtstag
+            // 
+            dtpGeburtstag.Location = new Point(297, 122);
+            dtpGeburtstag.Name = "dtpGeburtstag";
+            dtpGeburtstag.Size = new Size(253, 23);
+            dtpGeburtstag.TabIndex = 16;
             // 
             // Form5
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(699, 279);
-            Controls.Add(textBox5);
+            Controls.Add(dtpGeburtstag);
+            Controls.Add(tbxAdresse);
+            Controls.Add(label7);
+            Controls.Add(tbxKundenPunkte);
             Controls.Add(label6);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpKundenAnmeldeDatum);
             Controls.Add(label5);
-            Controls.Add(textBox4);
             Controls.Add(label4);
-            Controls.Add(textBox3);
+            Controls.Add(tbxNachName);
             Controls.Add(label3);
-            Controls.Add(textBox2);
+            Controls.Add(tbxVorName);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(tbxKundenNr);
             Controls.Add(label1);
             Name = "Form5";
             Text = "Form5";
@@ -187,18 +213,20 @@
         #endregion
 
         private Label label1;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox tbxKundenNr;
+        private TextBox tbxVorName;
         private Label label2;
-        private TextBox textBox3;
+        private TextBox tbxNachName;
         private Label label3;
-        private TextBox textBox4;
         private Label label4;
         private Label label5;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpKundenAnmeldeDatum;
         private Button button1;
         private Button button2;
-        private TextBox textBox5;
+        private TextBox tbxKundenPunkte;
         private Label label6;
+        private TextBox tbxAdresse;
+        private Label label7;
+        private DateTimePicker dtpGeburtstag;
     }
 }

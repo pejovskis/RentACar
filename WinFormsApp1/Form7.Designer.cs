@@ -30,16 +30,17 @@
         {
             button2 = new Button();
             button1 = new Button();
-            dateTimePicker1 = new DateTimePicker();
+            dtpMietStarten = new DateTimePicker();
             label5 = new Label();
-            textBox3 = new TextBox();
+            tbxAutoNr = new TextBox();
             label3 = new Label();
-            textBox2 = new TextBox();
+            tbxKundenNr = new TextBox();
             label2 = new Label();
-            textBox1 = new TextBox();
+            tbxVermietungsNr = new TextBox();
             label7 = new Label();
-            dateTimePicker2 = new DateTimePicker();
+            dtpMietBeenden = new DateTimePicker();
             label1 = new Label();
+            button3 = new Button();
             SuspendLayout();
             // 
             // button2
@@ -60,13 +61,14 @@
             button1.TabIndex = 38;
             button1.Text = "Vermieten";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += btnAutoVermieten_Click;
             // 
-            // dateTimePicker1
+            // dtpMietStarten
             // 
-            dateTimePicker1.Location = new Point(247, 139);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(253, 23);
-            dateTimePicker1.TabIndex = 37;
+            dtpMietStarten.Location = new Point(247, 139);
+            dtpMietStarten.Name = "dtpMietStarten";
+            dtpMietStarten.Size = new Size(253, 23);
+            dtpMietStarten.TabIndex = 37;
             // 
             // label5
             // 
@@ -77,44 +79,44 @@
             label5.TabIndex = 36;
             label5.Text = "Miet Starten";
             // 
-            // textBox3
+            // tbxAutoNr
             // 
-            textBox3.Location = new Point(247, 110);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(253, 23);
-            textBox3.TabIndex = 33;
+            tbxAutoNr.Location = new Point(247, 110);
+            tbxAutoNr.Name = "tbxAutoNr";
+            tbxAutoNr.Size = new Size(253, 23);
+            tbxAutoNr.TabIndex = 33;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(116, 113);
             label3.Name = "label3";
-            label3.Size = new Size(33, 15);
+            label3.Size = new Size(46, 15);
             label3.TabIndex = 32;
-            label3.Text = "Auto";
+            label3.Text = "AutoNr";
             // 
-            // textBox2
+            // tbxKundenNr
             // 
-            textBox2.Location = new Point(247, 81);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(253, 23);
-            textBox2.TabIndex = 31;
+            tbxKundenNr.Location = new Point(247, 81);
+            tbxKundenNr.Name = "tbxKundenNr";
+            tbxKundenNr.Size = new Size(253, 23);
+            tbxKundenNr.TabIndex = 31;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(116, 84);
             label2.Name = "label2";
-            label2.Size = new Size(41, 15);
+            label2.Size = new Size(61, 15);
             label2.TabIndex = 30;
-            label2.Text = "Kunde";
+            label2.Text = "KundenNr";
             // 
-            // textBox1
+            // tbxVermietungsNr
             // 
-            textBox1.Location = new Point(247, 52);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(253, 23);
-            textBox1.TabIndex = 29;
+            tbxVermietungsNr.Location = new Point(247, 52);
+            tbxVermietungsNr.Name = "tbxVermietungsNr";
+            tbxVermietungsNr.Size = new Size(253, 23);
+            tbxVermietungsNr.TabIndex = 29;
             // 
             // label7
             // 
@@ -126,12 +128,12 @@
             label7.Text = "Vermietungs Nummer";
             label7.Click += label7_Click;
             // 
-            // dateTimePicker2
+            // dtpMietBeenden
             // 
-            dateTimePicker2.Location = new Point(247, 168);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(253, 23);
-            dateTimePicker2.TabIndex = 43;
+            dtpMietBeenden.Location = new Point(247, 168);
+            dtpMietBeenden.Name = "dtpMietBeenden";
+            dtpMietBeenden.Size = new Size(253, 23);
+            dtpMietBeenden.TabIndex = 43;
             // 
             // label1
             // 
@@ -142,22 +144,33 @@
             label1.TabIndex = 42;
             label1.Text = "Miet Beenden";
             // 
+            // button3
+            // 
+            button3.Location = new Point(227, 253);
+            button3.Name = "button3";
+            button3.Size = new Size(171, 23);
+            button3.TabIndex = 44;
+            button3.Text = "Vermietung Beenden";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += btnVermietungBeenden_Click;
+            // 
             // Form7
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(640, 288);
-            Controls.Add(dateTimePicker2);
+            Controls.Add(button3);
+            Controls.Add(dtpMietBeenden);
             Controls.Add(label1);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(dtpMietStarten);
             Controls.Add(label5);
-            Controls.Add(textBox3);
+            Controls.Add(tbxAutoNr);
             Controls.Add(label3);
-            Controls.Add(textBox2);
+            Controls.Add(tbxKundenNr);
             Controls.Add(label2);
-            Controls.Add(textBox1);
+            Controls.Add(tbxVermietungsNr);
             Controls.Add(label7);
             Name = "Form7";
             Text = "Form7";
@@ -168,15 +181,16 @@
         #endregion
         private Button button2;
         private Button button1;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dtpMietStarten;
         private Label label5;
-        private TextBox textBox3;
+        private TextBox tbxAutoNr;
         private Label label3;
-        private TextBox textBox2;
+        private TextBox tbxKundenNr;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox tbxVermietungsNr;
         private Label label7;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dtpMietBeenden;
         private Label label1;
+        private Button button3;
     }
 }
