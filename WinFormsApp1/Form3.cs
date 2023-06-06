@@ -21,5 +21,43 @@ namespace WinFormsApp1
         {
 
         }
+
+        private void btnAutoManagerAddAbbrechen_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAddAuto_Click(object sender, EventArgs e)
+        {
+            string AutoNr = tbxAutoNr.Text;
+            DateTime Baujahr = dtpBaujahr.Value;
+            string Hersteller = tbxHersteller.Text;
+            string Model = tbxModel.Text;
+            string Farbe = tbxFarbe.Text;
+            int Ps = 0;
+            double MietPreis = 0;
+
+            try
+            {
+                MietPreis = Convert.ToDouble(tbxMietPreis.Text);
+                Ps = Convert.ToInt32(tbxPs.Text);
+
+                //Auto Object
+                Auto newAuto = new Auto(AutoNr, Baujahr, Hersteller, Model, Farbe, Ps, false, MietPreis);
+
+                //Success Message
+                MessageBox.Show(newAuto.ToString(), "Success", MessageBoxButtons.OK);
+
+                //Zur Datenkbank hinfügen
+                newAuto.AddAutoInDb();
+
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show("Bitte nur Ziffer für das Feld \"Preis\" oder \"Ps\" benutzen!",
+                    "error", MessageBoxButtons.OK);
+            }
+
+        }
     }
 }

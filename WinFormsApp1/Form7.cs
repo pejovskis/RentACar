@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace WinFormsApp1
 {
-    public partial class Form6 : Form
+    public partial class Form7 : Form
     {
-        public Form6()
+        public Form7()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void label7_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnVermietungsManagerAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
         }

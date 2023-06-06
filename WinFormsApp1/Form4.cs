@@ -16,5 +16,26 @@ namespace WinFormsApp1
         {
             InitializeComponent();
         }
+
+        private void btnKundenManagerZurueck_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnKundenManagerAdd_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form5 AddKunde = new Form5();
+            AddKunde.ShowDialog(this);
+            this.Show();
+        }
+
+        private void btnKundeninfoAendern_click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form6 EditKunde = new Form6();
+            EditKunde.ShowDialog(this);
+            this.Show();
+        }
     }
 }

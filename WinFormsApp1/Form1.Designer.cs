@@ -29,40 +29,42 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
+            btnVermietung = new Button();
+            btnAutoMenager = new Button();
+            btnKundenMenager = new Button();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnVermietung
             // 
-            button1.Location = new Point(294, 161);
-            button1.Name = "button1";
-            button1.Size = new Size(216, 23);
-            button1.TabIndex = 0;
-            button1.Text = "Auto Manager";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnVermietung.Location = new Point(315, 161);
+            btnVermietung.Name = "btnVermietung";
+            btnVermietung.Size = new Size(216, 23);
+            btnVermietung.TabIndex = 0;
+            btnVermietung.Text = "Vermietung";
+            btnVermietung.UseVisualStyleBackColor = true;
+            btnVermietung.Click += btnVermietung_Click;
             // 
-            // button2
+            // btnAutoMenager
             // 
-            button2.Location = new Point(294, 12);
-            button2.Name = "button2";
-            button2.Size = new Size(216, 23);
-            button2.TabIndex = 1;
-            button2.Text = "Auto Manager";
-            button2.UseVisualStyleBackColor = true;
+            btnAutoMenager.Location = new Point(315, 12);
+            btnAutoMenager.Name = "btnAutoMenager";
+            btnAutoMenager.Size = new Size(216, 23);
+            btnAutoMenager.TabIndex = 1;
+            btnAutoMenager.Text = "Auto Manager";
+            btnAutoMenager.UseVisualStyleBackColor = true;
+            btnAutoMenager.Click += btnAutoManager_Click;
             // 
-            // button3
+            // btnKundenMenager
             // 
-            button3.Location = new Point(294, 86);
-            button3.Name = "button3";
-            button3.Size = new Size(216, 23);
-            button3.TabIndex = 2;
-            button3.Text = "Auto Manager";
-            button3.UseVisualStyleBackColor = true;
+            btnKundenMenager.Location = new Point(315, 86);
+            btnKundenMenager.Name = "btnKundenMenager";
+            btnKundenMenager.Size = new Size(216, 23);
+            btnKundenMenager.TabIndex = 2;
+            btnKundenMenager.Text = "Kunden Manager";
+            btnKundenMenager.UseVisualStyleBackColor = true;
+            btnKundenMenager.Click += btnKundenManager_Click;
             // 
             // pictureBox1
             // 
@@ -80,9 +82,9 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(543, 214);
             Controls.Add(pictureBox1);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnKundenMenager);
+            Controls.Add(btnAutoMenager);
+            Controls.Add(btnVermietung);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -91,9 +93,9 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
+        private Button btnVermietung;
+        private Button btnAutoMenager;
+        private Button btnKundenMenager;
         private PictureBox pictureBox1;
     }
 }

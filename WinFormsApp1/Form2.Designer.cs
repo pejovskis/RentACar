@@ -32,16 +32,18 @@
             button2 = new Button();
             button3 = new Button();
             listView1 = new ListView();
+            button4 = new Button();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.Location = new Point(12, 442);
+            button1.Location = new Point(273, 442);
             button1.Name = "button1";
             button1.Size = new Size(172, 23);
             button1.TabIndex = 0;
             button1.Text = "Add Auto";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += btnAutoManagerAdd_Click;
             // 
             // button2
             // 
@@ -55,7 +57,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(408, 442);
+            button3.Location = new Point(533, 442);
             button3.Name = "button3";
             button3.Size = new Size(172, 23);
             button3.TabIndex = 2;
@@ -70,11 +72,22 @@
             listView1.TabIndex = 3;
             listView1.UseCompatibleStateImageBehavior = false;
             // 
+            // button4
+            // 
+            button4.Location = new Point(12, 442);
+            button4.Name = "button4";
+            button4.Size = new Size(172, 23);
+            button4.TabIndex = 4;
+            button4.Text = "Zurueck";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += btnAutoManagerZurueck_Click;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(984, 477);
+            Controls.Add(button4);
             Controls.Add(listView1);
             Controls.Add(button3);
             Controls.Add(button2);
@@ -91,5 +104,6 @@
         private Button button2;
         private Button button3;
         private ListView listView1;
+        private Button button4;
     }
 }

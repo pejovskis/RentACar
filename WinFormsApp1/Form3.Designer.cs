@@ -28,33 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            tbxAutoNr = new TextBox();
             label1 = new Label();
             label2 = new Label();
-            textBox2 = new TextBox();
+            tbxHersteller = new TextBox();
             label3 = new Label();
-            textBox3 = new TextBox();
+            tbxModel = new TextBox();
             label4 = new Label();
-            textBox4 = new TextBox();
+            tbxPs = new TextBox();
             label5 = new Label();
-            textBox5 = new TextBox();
+            tbxFarbe = new TextBox();
             label6 = new Label();
-            textBox6 = new TextBox();
-            button1 = new Button();
+            tbxMietPreis = new TextBox();
+            btnAddAuto = new Button();
             button2 = new Button();
+            label7 = new Label();
+            dtpBaujahr = new DateTimePicker();
             SuspendLayout();
             // 
-            // textBox1
+            // tbxAutoNr
             // 
-            textBox1.Location = new Point(248, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(237, 23);
-            textBox1.TabIndex = 0;
+            tbxAutoNr.Location = new Point(248, 18);
+            tbxAutoNr.Name = "tbxAutoNr";
+            tbxAutoNr.Size = new Size(237, 23);
+            tbxAutoNr.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(103, 15);
+            label1.Location = new Point(103, 21);
             label1.Name = "label1";
             label1.Size = new Size(84, 15);
             label1.TabIndex = 1;
@@ -63,121 +65,141 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(103, 44);
+            label2.Location = new Point(103, 79);
             label2.Name = "label2";
             label2.Size = new Size(57, 15);
             label2.TabIndex = 3;
             label2.Text = "Hersteller";
             // 
-            // textBox2
+            // tbxHersteller
             // 
-            textBox2.Location = new Point(248, 41);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(237, 23);
-            textBox2.TabIndex = 2;
+            tbxHersteller.Location = new Point(248, 76);
+            tbxHersteller.Name = "tbxHersteller";
+            tbxHersteller.Size = new Size(237, 23);
+            tbxHersteller.TabIndex = 2;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(103, 73);
+            label3.Location = new Point(103, 108);
             label3.Name = "label3";
             label3.Size = new Size(41, 15);
             label3.TabIndex = 5;
             label3.Text = "Model";
             // 
-            // textBox3
+            // tbxModel
             // 
-            textBox3.Location = new Point(248, 70);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(237, 23);
-            textBox3.TabIndex = 4;
+            tbxModel.Location = new Point(248, 105);
+            tbxModel.Name = "tbxModel";
+            tbxModel.Size = new Size(237, 23);
+            tbxModel.TabIndex = 4;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(103, 102);
+            label4.Location = new Point(103, 137);
             label4.Name = "label4";
             label4.Size = new Size(19, 15);
             label4.TabIndex = 7;
             label4.Text = "Ps";
             // 
-            // textBox4
+            // tbxPs
             // 
-            textBox4.Location = new Point(248, 99);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(237, 23);
-            textBox4.TabIndex = 6;
+            tbxPs.Location = new Point(248, 134);
+            tbxPs.Name = "tbxPs";
+            tbxPs.Size = new Size(237, 23);
+            tbxPs.TabIndex = 6;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(103, 131);
+            label5.Location = new Point(103, 166);
             label5.Name = "label5";
             label5.Size = new Size(36, 15);
             label5.TabIndex = 9;
             label5.Text = "Farbe";
             // 
-            // textBox5
+            // tbxFarbe
             // 
-            textBox5.Location = new Point(248, 128);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(237, 23);
-            textBox5.TabIndex = 8;
+            tbxFarbe.Location = new Point(248, 163);
+            tbxFarbe.Name = "tbxFarbe";
+            tbxFarbe.Size = new Size(237, 23);
+            tbxFarbe.TabIndex = 8;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(103, 160);
+            label6.Location = new Point(103, 195);
             label6.Name = "label6";
             label6.Size = new Size(59, 15);
             label6.TabIndex = 11;
             label6.Text = "Miet Preis";
             label6.Click += label6_Click;
             // 
-            // textBox6
+            // tbxMietPreis
             // 
-            textBox6.Location = new Point(248, 157);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(237, 23);
-            textBox6.TabIndex = 10;
+            tbxMietPreis.Location = new Point(248, 192);
+            tbxMietPreis.Name = "tbxMietPreis";
+            tbxMietPreis.Size = new Size(237, 23);
+            tbxMietPreis.TabIndex = 10;
             // 
-            // button1
+            // btnAddAuto
             // 
-            button1.Location = new Point(305, 214);
-            button1.Name = "button1";
-            button1.Size = new Size(180, 23);
-            button1.TabIndex = 12;
-            button1.Text = "Add Auto";
-            button1.UseVisualStyleBackColor = true;
+            btnAddAuto.Location = new Point(305, 224);
+            btnAddAuto.Name = "btnAddAuto";
+            btnAddAuto.Size = new Size(180, 23);
+            btnAddAuto.TabIndex = 12;
+            btnAddAuto.Text = "Add Auto";
+            btnAddAuto.UseVisualStyleBackColor = true;
+            btnAddAuto.Click += btnAddAuto_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(103, 214);
+            button2.Location = new Point(103, 224);
             button2.Name = "button2";
             button2.Size = new Size(180, 23);
             button2.TabIndex = 13;
             button2.Text = "Abbrechen";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += btnAutoManagerAddAbbrechen_Click;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(103, 50);
+            label7.Name = "label7";
+            label7.Size = new Size(47, 15);
+            label7.TabIndex = 15;
+            label7.Text = "Baujahr";
+            // 
+            // dtpBaujahr
+            // 
+            dtpBaujahr.Location = new Point(248, 47);
+            dtpBaujahr.Name = "dtpBaujahr";
+            dtpBaujahr.Size = new Size(237, 23);
+            dtpBaujahr.TabIndex = 16;
             // 
             // Form3
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(578, 249);
+            ClientSize = new Size(578, 266);
+            Controls.Add(dtpBaujahr);
+            Controls.Add(label7);
             Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnAddAuto);
             Controls.Add(label6);
-            Controls.Add(textBox6);
+            Controls.Add(tbxMietPreis);
             Controls.Add(label5);
-            Controls.Add(textBox5);
+            Controls.Add(tbxFarbe);
             Controls.Add(label4);
-            Controls.Add(textBox4);
+            Controls.Add(tbxPs);
             Controls.Add(label3);
-            Controls.Add(textBox3);
+            Controls.Add(tbxModel);
             Controls.Add(label2);
-            Controls.Add(textBox2);
+            Controls.Add(tbxHersteller);
             Controls.Add(label1);
-            Controls.Add(textBox1);
+            Controls.Add(tbxAutoNr);
             Name = "Form3";
             Text = "Form3";
             ResumeLayout(false);
@@ -186,19 +208,21 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox tbxAutoNr;
         private Label label1;
         private Label label2;
-        private TextBox textBox2;
+        private TextBox tbxHersteller;
         private Label label3;
-        private TextBox textBox3;
+        private TextBox tbxModel;
         private Label label4;
-        private TextBox textBox4;
+        private TextBox tbxPs;
         private Label label5;
-        private TextBox textBox5;
+        private TextBox tbxFarbe;
         private Label label6;
-        private TextBox textBox6;
-        private Button button1;
+        private TextBox tbxMietPreis;
+        private Button btnAddAuto;
         private Button button2;
+        private Label label7;
+        private DateTimePicker dtpBaujahr;
     }
 }

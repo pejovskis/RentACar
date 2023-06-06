@@ -26,5 +26,18 @@ namespace WinFormsApp1
         {
 
         }
+
+        private void btnAutoManagerZurueck_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAutoManagerAdd_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form3 AutoManager = new Form3();
+            AutoManager.ShowDialog(this);
+            this.Show();
+        }
     }
 }
