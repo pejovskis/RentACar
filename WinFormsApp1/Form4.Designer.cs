@@ -28,20 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            listView1 = new ListView();
+            lvKunde = new ListView();
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
             button4 = new Button();
             SuspendLayout();
             // 
-            // listView1
+            // lvKunde
             // 
-            listView1.Location = new Point(12, 12);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(776, 384);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
+            lvKunde.Location = new Point(12, 12);
+            lvKunde.Name = "lvKunde";
+            lvKunde.Size = new Size(776, 384);
+            lvKunde.TabIndex = 0;
+            lvKunde.UseCompatibleStateImageBehavior = false;
+            lvKunde.View = View.Details;
+            lvKunde.SelectedIndexChanged += lvKunde_SelectedIndexChanged;
             // 
             // button1
             // 
@@ -91,7 +93,7 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(listView1);
+            Controls.Add(lvKunde);
             Name = "Form4";
             Text = "Form4";
             ResumeLayout(false);
@@ -99,7 +101,7 @@
 
         #endregion
 
-        private ListView listView1;
+        private ListView lvKunde;
         private Button button1;
         private Button button2;
         private Button button3;

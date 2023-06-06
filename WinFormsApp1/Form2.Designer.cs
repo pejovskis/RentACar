@@ -31,7 +31,7 @@
             button1 = new Button();
             button2 = new Button();
             button3 = new Button();
-            listView1 = new ListView();
+            lvAuto = new ListView();
             button4 = new Button();
             SuspendLayout();
             // 
@@ -64,13 +64,15 @@
             button3.Text = "Schaden Melden";
             button3.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // lvAuto
             // 
-            listView1.Location = new Point(12, 12);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(960, 412);
-            listView1.TabIndex = 3;
-            listView1.UseCompatibleStateImageBehavior = false;
+            lvAuto.Location = new Point(12, 12);
+            lvAuto.Name = "lvAuto";
+            lvAuto.Size = new Size(1058, 424);
+            lvAuto.TabIndex = 3;
+            lvAuto.UseCompatibleStateImageBehavior = false;
+            lvAuto.View = View.Details;
+            lvAuto.SelectedIndexChanged += lvAuto_SelectedIndexChanged;
             // 
             // button4
             // 
@@ -86,9 +88,9 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(984, 477);
+            ClientSize = new Size(1082, 474);
             Controls.Add(button4);
-            Controls.Add(listView1);
+            Controls.Add(lvAuto);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -103,7 +105,7 @@
         private Button button1;
         private Button button2;
         private Button button3;
-        private ListView listView1;
+        private ListView lvAuto;
         private Button button4;
     }
 }

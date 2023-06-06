@@ -23,6 +23,7 @@ namespace WinFormsApp1
         {
             this.Hide();
             Form2 AutoManager = new Form2();
+            AutoManager.GenerateAutoTable();
             AutoManager.ShowDialog(this);
             this.Show();
         }
@@ -31,6 +32,7 @@ namespace WinFormsApp1
         {
             this.Hide();
             Form4 KundenManager = new Form4();
+            KundenManager.GenerateKundeTable();
             KundenManager.ShowDialog(this);
             this.Show();
         }
