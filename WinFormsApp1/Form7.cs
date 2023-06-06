@@ -30,36 +30,30 @@ namespace WinFormsApp1
 
         private void btnAutoVermieten_Click(object sender, EventArgs e)
         {
-            string KundenNr = string.Empty;
-            int AutoNr = 0;
+
+            string KundenNr = tbxKundenNr.Text;
+            int AutoNr = Convert.ToInt32(tbxAutoNr.Text);
             string VermietungsNr = string.Empty;
 
-            string KundenNrCandidat = tbxKundenNr.Text;
-            int AutoNrCandidat = Convert.ToInt32(tbxAutoNr.Text);
-            DateTime StartMieteDatum = dtpMietStarten.Value;
-            DateTime EndMieteDatum = dtpMietBeenden.Value;
+            Auto auto = DatabaseHelper.GetAuto(AutoNr);
+            Kunde kunde = DatabaseHelper.GetKunden(KundenNr);
 
-            bool kundeExistiert = Kunde.KundeExist(KundenNrCandidat);
-            bool autoExistiert = Auto.AutoExist(AutoNrCandidat);
-            bool autoVermietet = false;
+            bool KundeExistiert = kunde.KundeExist();
+            bool AutoExistiert = auto.AutoExist();
+            bool AutoVermietet = auto.GetVermietet();
 
-            if (autoExistiert)
-            {
-                autoVermietet = Auto.CheckVermietet(AutoNrCandidat);
-            }
+            DateTime MieteStartDatum = dtpMietStarten.Value;
+            DateTime MieteEndDatum = dtpMietBeenden.Value;
 
-            // Check If Vermietung möglich ist
-            if (kundeExistiert && autoExistiert && !autoVermietet)
+            if (KundeExistiert && AutoExistiert && !AutoVermietet)
             {
                 try
                 {
-                    KundenNr = KundenNrCandidat;
-                    AutoNr = AutoNrCandidat;
-
-                    Rent autoVermieten = new Rent(KundenNr, AutoNr, StartMieteDatum, EndMieteDatum);
+                    
+                    Rent autoVermieten = new Rent(kunde, auto, MieteStartDatum, MieteEndDatum);
 
                     autoVermieten.VertragHinfuegen();
-                    Auto.AutoVermieten(AutoNr);
+                    auto.AutoVermieten();
                 }
                 catch (Exception ex)
                 {
@@ -69,19 +63,19 @@ namespace WinFormsApp1
             else
             {
                 // Check If Kunde Existiert
-                if (!kundeExistiert)
+                if (!KundeExistiert)
                 {
                     MessageBox.Show("Kunde existiert nicht.", "Fehler", MessageBoxButtons.OK);
                 }
 
                 // Check If Auto Existiert
-                if (!autoExistiert)
+                if (!AutoExistiert)
                 {
                     MessageBox.Show("Auto existiert nicht.", "Fehler", MessageBoxButtons.OK);
                 }
 
                 // Check if Auto is Vermietet
-                if (autoVermietet)
+                if (AutoVermietet)
                 {
                     MessageBox.Show("Das Auto ist bereits vermietet.", "Fehler", MessageBoxButtons.OK);
                 }
@@ -91,11 +85,13 @@ namespace WinFormsApp1
 
         private void btnVermietungBeenden_Click(object sender, EventArgs e)
         {
-            string VermietungsNr = string.Empty;
 
             string VermietungsNrCandidat = tbxVermietungsNr.Text;
 
-            Auto.AutoZurück(VermietungsNrCandidat);
+            Rent VermietungsVertrag = DatabaseHelper.GetRent(VermietungsNrCandidat);
+
+            VermietungsVertrag.AutoZurück();
+
         }
     }
 }

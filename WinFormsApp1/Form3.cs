@@ -29,7 +29,7 @@ namespace WinFormsApp1
 
         private void btnAddAuto_Click(object sender, EventArgs e)
         {
-            string AutoNr = tbxAutoNr.Text;
+            //int AutoNr = Convert.ToInt32(tbxAutoNr.Text);
             DateTime Baujahr = dtpBaujahr.Value;
             string Hersteller = tbxHersteller.Text;
             string Model = tbxModel.Text;
@@ -43,7 +43,7 @@ namespace WinFormsApp1
                 Ps = Convert.ToInt32(tbxPs.Text);
 
                 //Auto Object
-                Auto newAuto = new Auto(AutoNr, Baujahr, Hersteller, Model, Farbe, Ps, false, MietPreis);
+                Auto newAuto = new Auto(Baujahr, Hersteller, Model, Farbe, Ps, false, MietPreis);
 
                 //Success Message
                 MessageBox.Show(newAuto.ToString(), "Success", MessageBoxButtons.OK);

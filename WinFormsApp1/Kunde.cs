@@ -70,7 +70,7 @@ namespace WinFormsApp1
         }
 
         //Check Ob Kunde Existiert in der Datenbank
-        public static Boolean KundeExist(string KundenNr)
+        public Boolean KundeExist()
         {
 
             //SQL Connection
@@ -106,7 +106,7 @@ namespace WinFormsApp1
             }
         }
 
-        public static string GetKundenNr(string kundenNr)
+        public string GetKundenNr()
         {
             string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
             try
@@ -116,7 +116,7 @@ namespace WinFormsApp1
                     string sqlQuery = "SELECT kunden_nr FROM kunde WHERE kunden_nr=@KundenNr";
                     using (MySqlCommand command = new MySqlCommand(sqlQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@KundenNr", kundenNr);
+                        command.Parameters.AddWithValue("@KundenNr", KundenNr);
                         connection.Open();
 
                         using (MySqlDataReader reader = command.ExecuteReader())

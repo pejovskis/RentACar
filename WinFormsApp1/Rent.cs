@@ -10,15 +10,16 @@ namespace WinFormsApp1
     internal class Rent
     {
         public string VermietungsNr { get; private set; }
-        public string KundenNr { get; private set; }
-        public int AutoNr { get; private set; }
+        public Kunde Kunde { get; private set; }
+        public Auto Auto { get; private set; }
         public DateTime StartMieteDatum { get; private set; }
         public DateTime EndMieteDatum { get; private set; }
 
-        public Rent(string KundenNr, int AutoNr, DateTime StartMieteDatum, DateTime EndMieteDatum)
+        //Constructor
+        public Rent(Kunde Kunde, Auto Auto, DateTime StartMieteDatum, DateTime EndMieteDatum)
         {
-            this.KundenNr = KundenNr;
-            this.AutoNr = AutoNr;
+            this.Kunde = Kunde;
+            this.Auto = Auto;
             this.StartMieteDatum = StartMieteDatum;
             this.EndMieteDatum = EndMieteDatum;
             VermietungsNr = GenerateVermietungsNr();
@@ -35,21 +36,15 @@ namespace WinFormsApp1
             string month = StartMieteDatum.Month.ToString("00");
 
             // Combine KundenNr, AutoNr, date, and hourString to generate VermietungsNr
-            return KundenNr + AutoNr + year + month + hourString;
+            return Kunde.GetKundenNr() + Auto.GetAutoNr() + year + month + hourString;
         }
 
-
-
-
-        public float AutoZurueckGeben()
-        {
-            return 1;
-        }
-
+        //Vertrag Hinfuegen
         public void VertragHinfuegen()
         {
             string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
-
+            int AutoNr = Auto.GetAutoNr();
+            string KundenNr = Kunde.GetKundenNr();
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -79,7 +74,60 @@ namespace WinFormsApp1
             }
         }
 
+        // Auto Zurück
+        public void AutoZurück()
+        {
+            string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
+            
 
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Retrieve the AutoNr based on VermietungsNr
+                    string sqlQueryRetrieve = "SELECT auto_nr FROM vermietungs_vertrag WHERE vermietungs_nr=@VermietungsNr";
+                    int autoNr = Auto.GetAutoNr();
+
+                    using (MySqlCommand retrieveCommand = new MySqlCommand(sqlQueryRetrieve, connection))
+                    {
+                        retrieveCommand.Parameters.AddWithValue("@VermietungsNr", VermietungsNr);
+
+                        using (MySqlDataReader reader = retrieveCommand.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                autoNr = reader.GetInt32("auto_nr");
+                            }
+                        }
+                    }
+
+                    if (autoNr != 0)
+                    {
+                        // Update the vermietet status to false for the retrieved AutoNr
+                        string sqlQueryUpdate = "UPDATE auto SET vermietet=false WHERE auto_nr=@AutoNr";
+
+                        using (MySqlCommand updateCommand = new MySqlCommand(sqlQueryUpdate, connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@AutoNr", autoNr);
+                            updateCommand.ExecuteNonQuery();
+                            MessageBox.Show("Auto erfolgreich abgemeldet.", "Erfolg", MessageBoxButtons.OK);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Auto nicht gefunden.", "Fehler", MessageBoxButtons.OK);
+                    }
+
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler bei der Datenbankoperation!", MessageBoxButtons.OK);
+            }
+        }
 
 
     }
