@@ -44,11 +44,11 @@ namespace WinFormsApp1
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
                     string query = @"INSERT INTO auto (auto_nr, hersteller, model, baujahr, ps, farbe, vermietet, mietpries)
-                            VALUES (@AutoNr, @Hersteller, @Model, @Baujahr, @Ps, @Farbe, @Vermietet, @MietPreis)";
+                            VALUES (@AutoNrIn2, @Hersteller, @Model, @Baujahr, @Ps, @Farbe, @Vermietet, @MietPreis)";
 
                     using (MySqlCommand command = new MySqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@AutoNr", this.AutoNr);
+                        command.Parameters.AddWithValue("@AutoNrIn2", this.AutoNr);
                         command.Parameters.AddWithValue("@Hersteller", this.Hersteller);
                         command.Parameters.AddWithValue("@Model", this.Model);
                         command.Parameters.AddWithValue("@Baujahr", this.Baujahr.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -72,7 +72,7 @@ namespace WinFormsApp1
         }
         
         //Check if Auto Existiert
-        public static Boolean AutoExist(string AutoNr)
+        public static Boolean AutoExist(int AutoNr)
         {
 
             //SQL Connection
@@ -108,11 +108,8 @@ namespace WinFormsApp1
             }
         }
 
-        //Check if Auto Vermietet
-        public static Boolean CheckIfVermietet(string AutoNr)
+        public static bool CheckVermietet(int AutoNr)
         {
-
-            //SQL Connection
             string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
             try
             {
@@ -126,9 +123,9 @@ namespace WinFormsApp1
 
                         using (MySqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.HasRows && reader.GetBoolean("vermietet"))
+                            if (reader.Read()) // Call Read() to advance to the first row
                             {
-                                return true;
+                                return reader.GetBoolean("vermietet");
                             }
                             else
                             {
@@ -141,12 +138,13 @@ namespace WinFormsApp1
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Fehler bei der Datenkbank Search Versuch!", MessageBoxButtons.OK);
-                return false;
+                return true;
             }
         }
 
+
         //Auto Unavailable
-        public static void AutoVermieten(string AutoNrIn)
+        public static void AutoVermieten(int AutoNr)
         {
             // SQL Connection
             string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
@@ -154,10 +152,10 @@ namespace WinFormsApp1
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    string sqlQuery = "UPDATE auto SET vermietet=true WHERE auto_nr=@AutoNrIn";
+                    string sqlQuery = "UPDATE auto SET vermietet=true WHERE auto_nr=@AutoNr";
                     using (MySqlCommand command = new MySqlCommand(sqlQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@AutoNrIn", AutoNrIn);
+                        command.Parameters.AddWithValue("@AutoNr", AutoNr);
                         connection.Open();
                         command.ExecuteNonQuery();
                         MessageBox.Show("Auto erfolgreich vermietet.", "Erfolg", MessageBoxButtons.OK);
@@ -171,36 +169,57 @@ namespace WinFormsApp1
             }
         }
 
-        //Auto zurück
-        public static void AutoZurück(string AutoNr)
+        // Auto Zurück
+        public static void AutoZurück(string VermietungsNr)
         {
-
-            //SQL Connection
             string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
+
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    string sqlQuery = "UPDATE auto auto SET vermietet=false WHERE auto_nr=@AutoNr ";
-                    using (MySqlCommand command = new MySqlCommand(sqlQuery, connection))
-                    {
-                        command.Parameters.AddWithValue("@AutoNr", AutoNr);
-                        connection.Open();
+                    connection.Open();
 
-                        using (MySqlDataReader reader = command.ExecuteReader())
+                    // Retrieve the AutoNr based on VermietungsNr
+                    string sqlQueryRetrieve = "SELECT auto_nr FROM vermietungs_vertrag WHERE vermietungs_nr=@VermietungsNr";
+                    int autoNr = 0;
+
+                    using (MySqlCommand retrieveCommand = new MySqlCommand(sqlQueryRetrieve, connection))
+                    {
+                        retrieveCommand.Parameters.AddWithValue("@VermietungsNr", VermietungsNr);
+
+                        using (MySqlDataReader reader = retrieveCommand.ExecuteReader())
                         {
-                            command.Parameters.AddWithValue("@AutoNr", AutoNr);
-                            connection.Open();
-                            command.ExecuteNonQuery();
-                            MessageBox.Show("Auto erfolgreich vermietet.", "Erfolg", MessageBoxButtons.OK);
-                            connection.Close();
+                            if (reader.Read())
+                            {
+                                autoNr = reader.GetInt32("auto_nr");
+                            }
                         }
                     }
+
+                    if (autoNr != 0)
+                    {
+                        // Update the vermietet status to false for the retrieved AutoNr
+                        string sqlQueryUpdate = "UPDATE auto SET vermietet=false WHERE auto_nr=@AutoNr";
+
+                        using (MySqlCommand updateCommand = new MySqlCommand(sqlQueryUpdate, connection))
+                        {
+                            updateCommand.Parameters.AddWithValue("@AutoNr", autoNr);
+                            updateCommand.ExecuteNonQuery();
+                            MessageBox.Show("Auto erfolgreich abgemeldet.", "Erfolg", MessageBoxButtons.OK);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Auto nicht gefunden.", "Fehler", MessageBoxButtons.OK);
+                    }
+
+                    connection.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Fehler bei der Datenkbank Search Versuch!", MessageBoxButtons.OK);
+                MessageBox.Show(ex.Message, "Fehler bei der Datenbankoperation!", MessageBoxButtons.OK);
             }
         }
 
@@ -230,7 +249,7 @@ namespace WinFormsApp1
 
         public override string ToString()
         {
-            return $"AutoNr: {AutoNr}, Baujahr: {Baujahr}, Hersteller: {Hersteller}, Model: {Model}, Farbe: {Farbe}, MietPreis: {MietPreis}";
+            return $"AutoNrIn2: {AutoNr}, Baujahr: {Baujahr}, Hersteller: {Hersteller}, Model: {Model}, Farbe: {Farbe}, MietPreis: {MietPreis}";
         }
 
     }

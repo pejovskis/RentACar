@@ -11,11 +11,11 @@ namespace WinFormsApp1
     {
         public string VermietungsNr { get; private set; }
         public string KundenNr { get; private set; }
-        public string AutoNr { get; private set; }
+        public int AutoNr { get; private set; }
         public DateTime StartMieteDatum { get; private set; }
         public DateTime EndMieteDatum { get; private set; }
 
-        public Rent(string KundenNr, string AutoNr, DateTime StartMieteDatum, DateTime EndMieteDatum)
+        public Rent(string KundenNr, int AutoNr, DateTime StartMieteDatum, DateTime EndMieteDatum)
         {
             this.KundenNr = KundenNr;
             this.AutoNr = AutoNr;

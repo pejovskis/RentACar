@@ -33,6 +33,7 @@
             btnAutoMenager = new Button();
             btnKundenMenager = new Button();
             pictureBox1 = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -71,16 +72,27 @@
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.Location = new Point(12, 12);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(276, 172);
+            pictureBox1.Size = new Size(297, 172);
             pictureBox1.TabIndex = 3;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(315, 234);
+            button1.Name = "button1";
+            button1.Size = new Size(216, 23);
+            button1.TabIndex = 4;
+            button1.Text = "Datenbank Reset";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += btnDatenbankReset_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(543, 214);
+            ClientSize = new Size(561, 309);
+            Controls.Add(button1);
             Controls.Add(pictureBox1);
             Controls.Add(btnKundenMenager);
             Controls.Add(btnAutoMenager);
@@ -97,5 +109,6 @@
         private Button btnAutoMenager;
         private Button btnKundenMenager;
         private PictureBox pictureBox1;
+        private Button button1;
     }
 }

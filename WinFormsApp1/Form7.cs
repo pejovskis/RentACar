@@ -31,25 +31,25 @@ namespace WinFormsApp1
         private void btnAutoVermieten_Click(object sender, EventArgs e)
         {
             string KundenNr = string.Empty;
-            string AutoNr = string.Empty;
+            int AutoNr = 0;
             string VermietungsNr = string.Empty;
 
             string KundenNrCandidat = tbxKundenNr.Text;
-            string AutoNrCandidat = tbxAutoNr.Text;
+            int AutoNrCandidat = Convert.ToInt32(tbxAutoNr.Text);
             DateTime StartMieteDatum = dtpMietStarten.Value;
             DateTime EndMieteDatum = dtpMietBeenden.Value;
 
+            bool kundeExistiert = Kunde.KundeExist(KundenNrCandidat);
+            bool autoExistiert = Auto.AutoExist(AutoNrCandidat);
+            bool autoVermietet = false;
 
-            Boolean kundeExistiert = Kunde.KundeExist(KundenNrCandidat);
-            Boolean autoExistiert = Auto.AutoExist(AutoNrCandidat);
-            Boolean autoVermietet = false;
             if (autoExistiert)
             {
-                autoVermietet = Auto.CheckIfVermietet(AutoNr);
+                autoVermietet = Auto.CheckVermietet(AutoNrCandidat);
             }
 
-            //Check If Vermietung möglich ist
-            if (kundeExistiert && autoExistiert && autoVermietet)
+            // Check If Vermietung möglich ist
+            if (kundeExistiert && autoExistiert && !autoVermietet)
             {
                 try
                 {
@@ -61,42 +61,41 @@ namespace WinFormsApp1
                     autoVermieten.VertragHinfuegen();
                     Auto.AutoVermieten(AutoNr);
                 }
-                catch
-                (Exception ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK);
+                    MessageBox.Show(ex.Message, "Fehler", MessageBoxButtons.OK);
                 }
             }
             else
             {
-                //Check If Kunde Existiert
-                if (!(kundeExistiert))
+                // Check If Kunde Existiert
+                if (!kundeExistiert)
                 {
-                    MessageBox.Show("Kunde Existiert Nicht", "Ne", MessageBoxButtons.OK);
+                    MessageBox.Show("Kunde existiert nicht.", "Fehler", MessageBoxButtons.OK);
                 }
 
-                //Check If Auto Existiert
-                if (!(autoExistiert))
+                // Check If Auto Existiert
+                if (!autoExistiert)
                 {
-                    MessageBox.Show("Auto Existiert Nicht", "Ne", MessageBoxButtons.OK);
+                    MessageBox.Show("Auto existiert nicht.", "Fehler", MessageBoxButtons.OK);
                 }
 
-                //Check if Auto is Vermietet
-                if (!(autoVermietet))
+                // Check if Auto is Vermietet
+                if (autoVermietet)
                 {
-                    MessageBox.Show("Auto Schon Vermietet", "Ne", MessageBoxButtons.OK);
+                    MessageBox.Show("Das Auto ist bereits vermietet.", "Fehler", MessageBoxButtons.OK);
                 }
             }
-
         }
+
 
         private void btnVermietungBeenden_Click(object sender, EventArgs e)
         {
             string VermietungsNr = string.Empty;
 
-            string VermietungsNrCandiat = tbxVermietungsNr.Text;
+            string VermietungsNrCandidat = tbxVermietungsNr.Text;
 
-            Auto.AutoZurück(VermietungsNr);
+            Auto.AutoZurück(VermietungsNrCandidat);
         }
     }
 }
