@@ -49,7 +49,7 @@ namespace WinFormsApp1
             }
 
             //Check If Vermietung möglich ist
-            if (kundeExistiert && autoExistiert && !(autoVermietet))
+            if (kundeExistiert && autoExistiert && autoVermietet)
             {
                 try
                 {
@@ -82,9 +82,9 @@ namespace WinFormsApp1
                 }
 
                 //Check if Auto is Vermietet
-                if (autoVermietet)
+                if (!(autoVermietet))
                 {
-                    MessageBox.Show("Auto Existiert Nicht", "Ne", MessageBoxButtons.OK);
+                    MessageBox.Show("Auto Schon Vermietet", "Ne", MessageBoxButtons.OK);
                 }
             }
 

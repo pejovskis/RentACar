@@ -146,36 +146,29 @@ namespace WinFormsApp1
         }
 
         //Auto Unavailable
-        public static void AutoVermieten(string AutoNr)
+        public static void AutoVermieten(string AutoNrIn)
         {
-
-                //SQL Connection
-                string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
-                try
+            // SQL Connection
+            string connectionString = "Server=localhost; Database=rentacar; Uid=root; Pwd=;";
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                        using (MySqlConnection connection = new MySqlConnection(connectionString))
-                        {
-                            string sqlQuery = "UPDATE auto auto SET vermietet=true WHERE auto_nr=@AutoNr ";
-                        using (MySqlCommand command = new MySqlCommand(sqlQuery, connection))
-                        {
-                            command.Parameters.AddWithValue("@AutoNr", AutoNr);
-                            connection.Open();
-
-                            using (MySqlDataReader reader = command.ExecuteReader())
-                            {
-                                command.Parameters.AddWithValue("@AutoNr", AutoNr);
-                                connection.Open();
-                                command.ExecuteNonQuery();
-                                MessageBox.Show("Auto erfolgreich vermietet.", "Erfolg", MessageBoxButtons.OK);
-                                connection.Close();
-                            }
-                        }
+                    string sqlQuery = "UPDATE auto SET vermietet=true WHERE auto_nr=@AutoNrIn";
+                    using (MySqlCommand command = new MySqlCommand(sqlQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@AutoNrIn", AutoNrIn);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Auto erfolgreich vermietet.", "Erfolg", MessageBoxButtons.OK);
+                        connection.Close();
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Fehler bei der Datenkbank Search Versuch!", MessageBoxButtons.OK);
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler bei der Datenkbank Search Versuch!", MessageBoxButtons.OK);
+            }
         }
 
         //Auto zurück
